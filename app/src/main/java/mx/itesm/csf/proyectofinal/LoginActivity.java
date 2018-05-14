@@ -67,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Check if user is logged
+        check_login();
+
         editTextUsuario  = (EditText) findViewById(R.id.lg_usuario);
         editTextPassword = (EditText) findViewById(R.id.lg_pass);
 
@@ -131,6 +134,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         progressBar.hide();
+    }
+    
+    private void check_login()
+    {
+
     }
 
 

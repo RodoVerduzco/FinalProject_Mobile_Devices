@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.gc.materialdesign.views.ButtonRectangle;
 
 import mx.itesm.csf.proyectofinal.Fragments.Historial;
 import mx.itesm.csf.proyectofinal.Fragments.Search;
@@ -15,6 +18,7 @@ import mx.itesm.csf.proyectofinal.Fragments.Update_client_info_Fragment;
 public class MainActivity extends AppCompatActivity {
 
     Fragment selectedFragment = null;
+    ButtonRectangle logout;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        logout = findViewById(R.id.btn_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //logout_user();
+            }
+        });
 
        /* Obtener el Bottom navigation View y agregar listener */
         BottomNavigationView navigation_owner =  findViewById(R.id.navigation);
