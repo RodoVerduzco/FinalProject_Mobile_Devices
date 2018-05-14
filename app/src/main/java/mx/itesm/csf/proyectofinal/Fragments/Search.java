@@ -40,7 +40,7 @@ public class Search extends Fragment implements VolleyWrapperInterface {
     RecyclerView.LayoutManager recLayoutManager;
     List<SearchModel> search_list_Elements;
 
-    ButtonFlat btn;
+
     EditText searchbar;
 
     ProgressDialog progressBar;
@@ -63,18 +63,6 @@ public class Search extends Fragment implements VolleyWrapperInterface {
         recView =  getView().findViewById(R.id.recyclerview);
         progressBar = new ProgressDialog(getContext());
         search_list_Elements= new ArrayList<>();
-
-        btn.findViewById(R.id.btn);
-        searchbar.findViewById(R.id.searchbar);
-
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-                String query = Services.AGENCY + "/" + searchbar.getText();
-
-            }
-        });
 
         try {
             get_data();
@@ -115,10 +103,9 @@ public class Search extends Fragment implements VolleyWrapperInterface {
 
                 SearchModel sch = new SearchModel();
 
-                sch.setType(jo.getString("type"));
-                sch.setDescription(jo.getString("description"));
-                sch.setDestination(jo.getString("destination"));
-                sch.setPrice(""+jo.getInt("price"));
+                sch.setType(jo.getString("name"));
+                sch.setDescription(jo.getString("address"));
+                sch.setDestination(jo.getString("phone"));
 
                 search_list_Elements.add(sch);
             }

@@ -104,7 +104,7 @@ public class VideoSplash extends YouTubeBaseActivity implements YouTubePlayer.On
 
         @Override
         public void onVideoEnded() {
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            startActivity(new Intent(getApplicationContext(), SplashScreen.class));
         }
 
         @Override

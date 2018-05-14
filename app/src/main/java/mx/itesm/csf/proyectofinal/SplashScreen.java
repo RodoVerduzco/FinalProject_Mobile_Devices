@@ -20,20 +20,20 @@ public class SplashScreen extends AppCompatActivity {
     String TAG = "SPLASH";
     String splash_url;
 
-    final int SPLASH_NUM = 5;
 
-    /*@Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         View easySplashScreenView = new EasySplashScreen(SplashScreen.this)
                 .withFullScreen()
-                .withTargetActivity(VideoSplash.class)
+                .withTargetActivity(LoginActivity.class)
                 .withSplashTimeOut(2000)
                 .withBackgroundResource(android.R.color.black)
                 .withLogo(R.drawable.logo)
                 .create();
 
         setContentView(easySplashScreenView);
-    }*/
+    }
 }
