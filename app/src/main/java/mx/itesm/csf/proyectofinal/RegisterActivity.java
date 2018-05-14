@@ -2,16 +2,22 @@ package mx.itesm.csf.proyectofinal;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.gc.materialdesign.views.ButtonRectangle;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegisterActivity extends AppCompatActivity {
+import mx.itesm.csf.proyectofinal.Controller.Services;
+import mx.itesm.csf.proyectofinal.Model.SearchModel;
+
+public class RegisterActivity extends AppCompatActivity implements VolleyWrapperInterface {
 
     EditText name, ap, am, dir, tel, mail, pass;
     String name_str, ap_str, am_str, dir_str, tel_str, mail_str, pass_str;
@@ -55,9 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         pass_str = pass.getText().toString();
 
         // Check nothing is missing
-        if(name_str.matches("") || ap_str.matches("") || am_str.matches("") || dir_str.matches("") ||
-            tel_str.matches("") || mail_str.matches("") || pass_str.matches(""))
-        {
+
             JSONObject json = new JSONObject();
 
             json.put("name", name_str);
@@ -68,12 +72,29 @@ public class RegisterActivity extends AppCompatActivity {
             json.put("email", mail_str);
             json.put("password", pass_str);
 
-            Toast.makeText(RegisterActivity.this, "Info " + json.toString(), Toast.LENGTH_LONG ).show();
-        }
-        else{
-            Toast.makeText(RegisterActivity.this, "Favor de llenar toda la información requerida", Toast.LENGTH_LONG).show();
-        }
+            Log.d("A", json.toString());
+            VolleyWrapper vw = new VolleyWrapper(this, this);
+            vw.execute(
+                    Services.CLIENT,
+                    Request.Method.POST,
+                    json.toString(),
+                    "",
+                    VolleyWrapper.ResourceType.RRawData
+            );
 
     }
+
+    public void OnResponse(Object data) {
+        Log.d("SEARCH", data.toString());
+        Toast.makeText(this, "REGISTO CORRECTO, regrese e inicie sesión para continuar", Toast.LENGTH_LONG).show();
+
+
+    }
+
+    public void OnError(Exception e) {
+
+    }
+
+
 
 }

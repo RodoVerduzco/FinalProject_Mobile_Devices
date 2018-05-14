@@ -8,23 +8,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import com.android.volley.Request;
+import com.gc.materialdesign.views.ButtonFlat;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mx.itesm.csf.proyectofinal.Adapters.SearchAdapter;
+import mx.itesm.csf.proyectofinal.Controller.Services;
+import mx.itesm.csf.proyectofinal.Model.HistorialModel;
 import mx.itesm.csf.proyectofinal.Model.SearchModel;
 import mx.itesm.csf.proyectofinal.R;
+import mx.itesm.csf.proyectofinal.SessionWrapper;
+import mx.itesm.csf.proyectofinal.VolleyWrapper;
+import mx.itesm.csf.proyectofinal.VolleyWrapperInterface;
 
-public class Search extends Fragment {
+public class Search extends Fragment implements VolleyWrapperInterface {
 
     RecyclerView recView;
     RecyclerView.Adapter recAdapter;
     RecyclerView.LayoutManager recLayoutManager;
     List<SearchModel> search_list_Elements;
+
+    ButtonFlat btn;
+    EditText searchbar;
 
     ProgressDialog progressBar;
     public static Search newInstance() {
@@ -47,16 +64,75 @@ public class Search extends Fragment {
         progressBar = new ProgressDialog(getContext());
         search_list_Elements= new ArrayList<>();
 
+        btn.findViewById(R.id.btn);
+        searchbar.findViewById(R.id.searchbar);
 
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
 
-                             /* TODO Get the data */
+                String query = Services.AGENCY + "/" + searchbar.getText();
 
+            }
+        });
 
+        try {
+            get_data();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         /* CardView components */
         recLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false); /* Change to Grid Layout*/
         recView.setLayoutManager(recLayoutManager);
         recAdapter = new SearchAdapter(getContext(), search_list_Elements);
         recView.setAdapter(recAdapter);
+    }
+
+    public void get_data() throws JSONException {
+
+        SessionWrapper sw = new SessionWrapper(getContext());
+
+        VolleyWrapper vw = new VolleyWrapper(this, getContext());
+        vw.execute(
+                Services.AGENCY,
+                Request.Method.GET,
+                "",
+                "",
+                VolleyWrapper.ResourceType.RJSONArray
+        );
+    }
+
+    public void OnResponse(Object data) {
+        Log.d("SEARCH", data.toString());
+
+        JSONArray ja = (JSONArray) data;
+
+        try{
+            for(int i=0; i<ja.length(); i++)
+            {
+                JSONObject jo = ja.getJSONObject(i);
+
+                SearchModel sch = new SearchModel();
+
+                sch.setType(jo.getString("type"));
+                sch.setDescription(jo.getString("description"));
+                sch.setDestination(jo.getString("destination"));
+                sch.setPrice(""+jo.getInt("price"));
+
+                search_list_Elements.add(sch);
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        recAdapter.notifyDataSetChanged();
+
+    }
+
+    public void OnError(Exception e) {
+
     }
 }

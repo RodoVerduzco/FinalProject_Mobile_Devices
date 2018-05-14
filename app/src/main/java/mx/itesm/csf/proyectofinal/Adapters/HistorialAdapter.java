@@ -53,10 +53,10 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
 
         /* Get the name from the model and set the name in the holder*/
         holder._id.setText(historialModel.getType());
-        //holder.product_name.setText(ventasModel.getProduct_name());
-        //holder.client_name.setText(ventasModel.getClient_name());
-        //holder.product_specs.setText(ventasModel.getProduct_specs());
-        //holder.product_price.setText(ventasModel.getProduct_price());
+        holder.dest.setText(historialModel.getDestination());
+        holder.desc.setText(historialModel.getDescription());
+        holder.type.setText(historialModel.getType());
+        holder.price.setText(historialModel.getPrice());
 
         holder.historialModel = historialModel;
 
@@ -78,11 +78,10 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
     class HistorialContainer extends RecyclerView.ViewHolder
     {
         TextView _id;
-        /*TextView venta_id;
-        TextView product_name;
-        TextView client_name;
-        TextView product_specs;
-        TextView product_price;*/
+        TextView type;
+        TextView dest;
+        TextView desc;
+        TextView price;
 
         ButtonFlat btn;
 
@@ -96,13 +95,10 @@ public class HistorialAdapter extends RecyclerView.Adapter<HistorialAdapter.Hist
             // Find the view Components
 
             _id = itemView.findViewById(R.id._id);
-            /*venta_id       =  itemView.findViewById(R.id.v_id);
-            product_name   =  itemView.findViewById(R.id.v_sales);
-            client_name    =  itemView.findViewById(R.id.v_name);
-            product_specs  =  itemView.findViewById(R.id.v_store);
-            product_price  =  itemView.findViewById(R.id.product_price);
-            btn_entregado  =  itemView.findViewById(R.id.btn_entregado);*/
-
+            dest   =  itemView.findViewById(R.id.v_sales);
+            desc   =  itemView.findViewById(R.id.v_name);
+            type =  itemView.findViewById(R.id.v_store);
+            price  =  itemView.findViewById(R.id.product_price);
         }
 
     }

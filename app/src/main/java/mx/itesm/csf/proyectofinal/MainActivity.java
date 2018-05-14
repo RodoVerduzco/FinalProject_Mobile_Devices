@@ -9,8 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.Request;
 import com.gc.materialdesign.views.ButtonRectangle;
 
+import org.json.JSONObject;
+
+import mx.itesm.csf.proyectofinal.Controller.Services;
 import mx.itesm.csf.proyectofinal.Fragments.Historial;
 import mx.itesm.csf.proyectofinal.Fragments.Search;
 import mx.itesm.csf.proyectofinal.Fragments.Update_client_info_Fragment;
@@ -56,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //logout_user();
+                logout_user();
             }
         });
 
@@ -68,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, Update_client_info_Fragment.newInstance());
         transaction.commit();
+    }
+
+    public void logout_user(){
+        SessionWrapper sw = new SessionWrapper(this);
+        sw.logout();
+        finish();
     }
 
 }

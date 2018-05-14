@@ -14,6 +14,7 @@ import com.gc.materialdesign.views.ButtonFlat;
 
 import java.util.List;
 ;
+import mx.itesm.csf.proyectofinal.Controller.Services;
 import mx.itesm.csf.proyectofinal.Model.SearchModel;
 import mx.itesm.csf.proyectofinal.R;
 
@@ -60,12 +61,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchCont
 
         holder.searchModel = searchModel;
 
-        holder.btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "Boton Presionado" , Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     /* Get the size of the List */
@@ -102,9 +97,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchCont
             product_specs  =  itemView.findViewById(R.id.v_store);
             product_price  =  itemView.findViewById(R.id.product_price);
             btn_entregado  =  itemView.findViewById(R.id.btn_entregado);*/
-
-            btn = itemView.findViewById(R.id.btn);
-            searchbar = itemView.findViewById(R.id.searchbar);
 
         }
 

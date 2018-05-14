@@ -47,4 +47,6 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
     implementation 'com.github.vajro:MaterialDesignLibrary:1.6'
+
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }

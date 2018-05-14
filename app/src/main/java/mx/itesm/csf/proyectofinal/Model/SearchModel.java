@@ -45,11 +45,11 @@ public class SearchModel {
         this.price = price;
     }
 
-    public String getProduct_price() {
+    public String setDescription() {
         return product_price;
     }
 
-    public void setProduct_price(String product_price) {
+    public void setDescription(String product_price) {
         this.product_price = product_price;
     }
 
